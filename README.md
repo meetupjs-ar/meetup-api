@@ -20,6 +20,10 @@ yarn install
 npm run start-dev
 ```
 
+## Colaboración
+
+[ToDo list](https://github.com/meetupjs-ar/meetup-api/projects/1)
+
 ## License
 
 MIT
