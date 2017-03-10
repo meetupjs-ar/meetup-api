@@ -3,6 +3,10 @@
 Microservicio que devuelve un JSON con los próximos eventos de los meetups indicados por configuración
 Usa `memory-cache` para storear los resultados durante un tiempo determinado
 
+## Live
+
+[meetup-api](https://meetup-api.now.sh/)
+
 ## Motivación
 
 Obtener los próximos eventos de tecnología de CABA, Buenos Aires, Argentina
