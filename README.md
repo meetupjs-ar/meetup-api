@@ -1,6 +1,6 @@
 # meetup-api
 
-Microservicio que devuelve un JSON con los próximos eventos de los meetups indicados por configuración. Usa `memory-cache` para storear los resultados durante un tiempo determinado
+Microservicio que devuelve un JSON con los próximos eventos de los meetups indicados por configuración
 
 ## Live
 
