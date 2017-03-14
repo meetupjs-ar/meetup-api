@@ -1,5 +1,5 @@
-// if we're in development, we require an specific configuration located at '.env'
-// at production, that configuration is setted directly and we don't use that file
+// si estamos en desarrollo, requerimos el archivo '.env'
+// en producción, esa configuración se recibe directamente como variables de entorno
 if (process.env.NODE_ENV === 'development') {
     require('dotenv').config()
 }
@@ -18,28 +18,29 @@ const cors = microCors({
 
 async function handler (req, res) {
     try {
-        // we look for the data in the memory cache
-        // if it's not present, we fetch, format and store the data into the cache
+        // si el resultado del API no fue previamente cacheado
         if (!cache.get('data')) {
-            // 1. we get the meetups covered by the configuration
+            // obtenemos un array de meetups que corresponden al rango es búsqueda
             const data = await getMeetups()
-                // 2. we ask for the events of each of those meetups
+                // buscamos los eventos de esos meetups
                 .then(meetups => meetups.map(m => getEvents(m.urlname)))
-                // 3. we wait to all the promises to be fullfilled
+                // cuando obtengamos toda la información, vamos a tener un array de arrays,
+                // donde cada uno es una lista de eventos
                 .then(eventsProms => Promise.all(eventsProms))
-                // 4. we create an one-level array from an arrays of arrays
+                // generamos un array de 1 solo nivel por medio de un reduce
+                // que solo concatena todos los eventos de los diferentes meetups
                 .then(eventsLists => eventsLists.reduce(
                     (output, events) => output.concat(events),
                     []
                 ))
 
-            // 1 minute of living time
+            // guardamos los datos en cache por el tiempo indicado por configuración
             cache.put('data', data, cacheExpiration)
         }
 
         send(res, 200, cache.get('data'))
     } catch (error) {
-        send(res, 500, `Ups! Hubo un error al obtener los datos\n\n${error.message}`)
+        send(res, 500, error.message)
     }
 }
 

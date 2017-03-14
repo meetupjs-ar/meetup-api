@@ -1,7 +1,6 @@
 {
   "name": "meetup-api",
   "version": "1.0.0",
-  "description": "Microservicio que devuelve un JSON con los próximos eventos de los meetups indicados por configuración",
   "main": "index.js",
   "scripts": {
     "precommit": "eslint '**/*.js'",
