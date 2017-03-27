@@ -11,10 +11,12 @@ const { send } = require('micro')
 const getEvents = require('./lib/get-events')
 const getMeetups = require('./lib/get-meetups')
 
+const blackList = process.env.BLACK_LIST ? process.env.BLACK_LIST.split(',') : []
 const cacheExpiration = parseInt(process.env.CACHE_EXPIRATION)
 const cors = microCors({
     allowMethods: ['GET']
 })
+const whiteList = process.env.WHITE_LIST ? process.env.WHITE_LIST.split(',') : []
 
 async function handler (req, res) {
     try {
@@ -22,6 +24,10 @@ async function handler (req, res) {
         if (!cache.get('data')) {
             // obtenemos un array de meetups que corresponden al rango es búsqueda
             const data = await getMeetups()
+                // filtramos los eventos que no queremos que aparezcan
+                .then(eventsList => eventsList.filter(event => !blackList.includes(event.id.toString())))
+                // agregamos los meetups que queremos que aparezcan que no entran en el rango de búsqueda
+                .then(meetups => meetups.concat(whiteList.map(m => ({urlname: m}))))
                 // buscamos los eventos de esos meetups
                 .then(meetups => meetups.map(m => getEvents(m.urlname)))
                 // cuando obtengamos toda la información, vamos a tener un array de arrays,
