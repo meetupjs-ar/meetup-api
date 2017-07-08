@@ -23,5 +23,9 @@
     "micro-cors": "^0.0.1",
     "moment": "^2.18.1",
     "nodemon": "^1.11.0"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/meetupjs-ar/meetup-api.git"
   }
 }
