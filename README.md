@@ -16,7 +16,7 @@ Microservicio que devuelve un JSON con los próximos eventos de los meetups indi
 ```bash
 # npm install
 yarn install
-npm run start-dev
+npm run dev
 ```
 
 ## License
