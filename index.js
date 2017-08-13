@@ -18,16 +18,18 @@ const cors = microCors({
 })
 const whiteList = process.env.WHITE_LIST ? process.env.WHITE_LIST.split(',') : []
 
-async function handler (req, res) {
+async function handler(req, res) {
     try {
         // si el resultado del API no fue previamente cacheado
         if (!cache.get('data')) {
             // obtenemos un array de meetups que corresponden al rango es búsqueda
             const data = await getMeetups()
                 // filtramos los eventos que no queremos que aparezcan
-                .then(eventsList => eventsList.filter(event => !blackList.includes(event.id.toString())))
+                .then(eventsList =>
+                    eventsList.filter(event => !blackList.includes(event.id.toString()))
+                )
                 // agregamos los meetups que queremos que aparezcan que no entran en el rango de búsqueda
-                .then(meetups => meetups.concat(whiteList.map(m => ({urlname: m}))))
+                .then(meetups => meetups.concat(whiteList.map(m => ({ urlname: m }))))
                 // buscamos los eventos de esos meetups
                 .then(meetups => meetups.map(m => getEvents(m.urlname)))
                 // cuando obtengamos toda la información, vamos a tener un array de arrays,
@@ -35,10 +37,9 @@ async function handler (req, res) {
                 .then(eventsProms => Promise.all(eventsProms))
                 // generamos un array de 1 solo nivel por medio de un reduce
                 // que solo concatena todos los eventos de los diferentes meetups
-                .then(eventsLists => eventsLists.reduce(
-                    (output, events) => output.concat(events),
-                    []
-                ))
+                .then(eventsLists =>
+                    eventsLists.reduce((output, events) => output.concat(events), [])
+                )
 
             // guardamos los datos en cache por el tiempo indicado por configuración
             cache.put('data', data, cacheExpiration)
