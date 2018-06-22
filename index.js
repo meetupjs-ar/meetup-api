@@ -20,9 +20,6 @@ const whiteList = process.env.WHITE_LIST ? process.env.WHITE_LIST.split(',') : [
 
 async function handler(req, res) {
     try {
-        // eslint-disable-next-line
-        console.log(process.env.CACHE_EXPIRATION)
-
         // si el resultado del API no fue previamente cacheado
         if (!cache.get('data')) {
             // obtenemos un array de meetups que corresponden al rango es búsqueda
