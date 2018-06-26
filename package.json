@@ -7,6 +7,7 @@
         "deploy": "now alias $(now --name $INSTANCE_NAME -e BLACK_LIST=$BLACK_LIST -e CACHE_EXPIRATION=$CACHE_EXPIRATION -e CATEGORIES=$CATEGORIES -e LAT=$LAT -e LON=$LON -e MEETUP_API_KEY=$MEETUP_API_KEY -e NODE_ENV=production -e RADIUS=$RADIUS --npm --token $NOW_TOKEN) $INSTANCE_NAME --token=$NOW_TOKEN",
         "dev": "micro-dev -p ${PORT:-4002}",
         "precommit": "eslint '**/*.js'",
+        "scale": "now scale $INSTANCE_NAME'.now.sh' sfo 1 --token $NOW_TOKEN",
         "start": "micro"
     },
     "author": "durancristhian@gmail.com",
