@@ -1,6 +1,6 @@
 # meetup-api
 
-[![Build Status](https://travis-ci.org/meetupjs-ar/meetup-api.svg?branch=master)](https://travis-ci.org/meetupjs-ar/meetup-api)
+[![Build Status](https://travis-ci.org/meetupjs-ar/meetup-api.svg?branch=master)](https://travis-ci.org/meetupjs-ar/meetup-api) [![Greenkeeper badge](https://badges.greenkeeper.io/meetupjs-ar/meetup-api.svg)](https://greenkeeper.io/)
 
 Microservicio que devuelve un JSON con los próximos eventos de los meetups indicados por configuración
 
