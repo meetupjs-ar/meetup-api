@@ -3,31 +3,35 @@
     "version": "1.0.1",
     "main": "index.js",
     "scripts": {
-        "clean-deploys": "now rm $INSTANCE_NAME --token $NOW_TOKEN --yes",
+        "clean-deploys": "now rm $INSTANCE_NAME --safe --token $NOW_TOKEN --yes",
         "deploy": "now alias $(now --name $INSTANCE_NAME -e BLACK_LIST=$BLACK_LIST -e CACHE_EXPIRATION=$CACHE_EXPIRATION -e CATEGORIES=$CATEGORIES -e LAT=$LAT -e LON=$LON -e MEETUP_API_KEY=$MEETUP_API_KEY -e RADIUS=$RADIUS --npm --token $NOW_TOKEN) $INSTANCE_NAME --token=$NOW_TOKEN",
         "dev": "micro-dev -p ${PORT:-4002}",
-        "precommit": "eslint '**/*.js'",
-        "scale": "now scale $INSTANCE_NAME 1 --token $NOW_TOKEN",
+        "scale": "now scale $INSTANCE_NAME sfo 1 --token $NOW_TOKEN",
         "start": "micro"
     },
     "author": "durancristhian@gmail.com",
     "license": "MIT",
     "devDependencies": {
-        "babel-eslint": "^8.2.3",
-        "eslint": "^4.19.1",
-        "husky": "^0.14.3",
+        "babel-eslint": "^10.0.1",
+        "eslint": "^5.6.1",
+        "husky": "^1.1.1",
         "micro-dev": "^3.0.0"
     },
     "dependencies": {
         "dotenv": "^6.0.0",
-        "got": "^8.3.1",
+        "got": "^9.2.2",
         "memory-cache": "^0.2.0",
-        "micro": "^9.3.2",
-        "micro-cors": "^0.1.0",
+        "micro": "^9.3.3",
+        "micro-cors": "^0.1.1",
         "moment": "^2.22.2"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/meetupjs-ar/meetup-api.git"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "eslint '**/*.js'"
+        }
     }
 }
