@@ -18,7 +18,7 @@
         "micro-dev": "^3.0.0"
     },
     "dependencies": {
-        "dotenv": "^6.0.0",
+        "dotenv": "^7.0.0",
         "got": "^9.2.2",
         "memory-cache": "^0.2.0",
         "micro": "^9.3.3",
