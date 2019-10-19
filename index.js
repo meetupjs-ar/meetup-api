@@ -7,7 +7,6 @@ if (process.env.NODE_ENV === 'development') {
 const cache = require('memory-cache')
 const microCors = require('micro-cors')
 const { send } = require('micro')
-const url = require('url')
 
 const scrapeEvents = require('./lib/scrape-events')
 
@@ -21,7 +20,7 @@ async function handler(req, res) {
         // si el resultado del API no fue previamente cacheado
         if (!cache.get('data')) {
             // obtenemos un array de meetups que corresponden al rango es búsqueda
-            const data = await scrapeEvents(url.parse(req.url, true).query.date)
+            const data = await scrapeEvents()
             // guardamos los datos en cache por el tiempo indicado por configuración
             cache.put('data', data, cacheExpiration)
         }
