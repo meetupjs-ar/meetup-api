@@ -10,7 +10,7 @@ const { send } = require('micro')
 
 const scrapeEvents = require('./lib/scrape-events')
 
-const cacheExpiration = parseInt(process.env.CACHE_EXPIRATION || 1000)
+const cacheExpiration = parseInt(process.env.CACHE_EXPIRATION)
 const cors = microCors({
     allowMethods: ['GET']
 })
